@@ -10,3 +10,8 @@ else:
     print("Não tem permissão para remover o usuário")
 
 # seu código aqui abaixo:
+
+if not (not usuario_admin and not pode_excluir):
+    print('Usuário removido')
+else:
+    print('Não tem permissão para remover o usuário')
