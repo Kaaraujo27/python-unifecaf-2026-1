@@ -8,3 +8,10 @@ else:
     print("Usuário inativo")
 
 # seu código aqui abaixo:
+
+usuario_ativo = True
+
+if usuario_ativo:
+    print("Usuário ativo")
+else:
+    print("Usuário inativo")
