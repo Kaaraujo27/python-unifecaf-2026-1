@@ -7,7 +7,7 @@
 # e se houver produto no estoque
 
 compra_paga = True
-produto_em_estoque = False
+produto_em_estoque = True
 
 if compra_paga and produto_em_estoque:
     print("O produto pode ser vendido.")
