@@ -10,3 +10,8 @@ else:
     print("Acesso negado")
 
 # seu código aqui abaixo:
+
+if not (not usuario_logado or not tem_permissao):
+    print("Acesso permitido")
+else:
+    print("Acesso negado")
