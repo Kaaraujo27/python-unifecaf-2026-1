@@ -7,7 +7,7 @@
 # também pode ter se possuir um cupom de desconto.
 
 cliente_vip = True
-cupom_desconto = False
+cupom_desconto = True
 
 if cliente_vip or cupom_desconto:
     print("O cliente tem direito ao desconto.")
