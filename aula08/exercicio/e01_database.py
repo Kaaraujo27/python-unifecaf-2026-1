@@ -65,8 +65,8 @@ def atualizar_roupa(conexao):
     print("\nRoupas cadastrados atualmente:")
     listar_roupas(conexao)
 
-    id_texto = input("ID da roupa: ").strip()
-    if not id_texto.isdigit():
+    id = input("ID da roupa: ").strip()
+    if not id.isdigit():
         print("ID invalido.")
         return
 
@@ -82,7 +82,7 @@ def atualizar_roupa(conexao):
 
     cursor = conexao.execute(
         "UPDATE roupas SET descricao = ?, marca = ? WHERE id = ?",
-        (nova_descricao, nova_marca, int(id_texto)),
+        (nova_descricao, nova_marca, int(id)),
     )
     conexao.commit()
 
@@ -93,11 +93,47 @@ def atualizar_roupa(conexao):
 
 
 def remover_roupa(conexao):
-    return
+    print("\nRoupas cadastradas atualmente:")
+    listar_roupas(conexao)
 
+    id = input("ID da roupa para remover: ").strip()
+    if not id.isdigit():
+        print("ID invalido.")
+        return
+
+    cursor = conexao.execute(
+        "DELETE FROM roupas WHERE id = ?",
+        (int(id),),
+    )
+    conexao.commit()
+
+    if cursor.rowcount == 0:
+        print("Roupa não encontrado.")
+    else:
+        print("Roupa removida com sucesso.")
 
 def buscar_roupa(conexao):
-    return
+    descricao = input("Digite a descrição da busca: ").strip()
+
+    if not descricao:
+        print("Descrição inválida.")
+        return
+
+    termo_busca = "%" + descricao + "%"
+    roupas = conexao.execute(
+        "SELECT id, descricao, marca FROM roupas "
+        "WHERE CAST(id AS TEXT) LIKE ? OR descricao LIKE ? OR marca LIKE ? "
+        "ORDER BY id",
+        (termo_busca, termo_busca, termo_busca),
+    ).fetchall()
+
+    if not roupa:
+        print("Nenhuma roupa encontrada.")
+        return
+
+    print("\nResultado da busca:")
+    for roupa in roupas:
+        print(f"[{roupas['id']}] {roupas['descricao']} - {roupas['marca']}")
 
 
 def exibir_menu():
