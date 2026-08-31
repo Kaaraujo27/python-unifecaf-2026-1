@@ -1,6 +1,6 @@
 from datetime import datetime
 
-data = input("Digite sua data (DD/MM/AAAA): ")
+data = input("Digite sua data de nascimento (DD/MM/AAAA): ")
 try:
     datetime.strptime(data, "%d/%m/%Y")
     print("Data válida")
