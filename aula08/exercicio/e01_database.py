@@ -25,14 +25,71 @@ def criar_tabela(conexao):
 
 
 def inserir_roupa(conexao):
-    return
+    print("\nRoupas cadastradas atualmente:")
+    listar_roupas(conexao)
+
+    descricao = input("Nome da roupa: ").strip()
+    if not descricao:
+        print("Nome invalido.")
+        return
+
+    marca = input("Marca: ").strip()
+    if not marca:
+        print("Marca invalida.")
+        return
+
+    try:
+        conexao.execute(
+            "INSERT INTO roupas (descricao, marca) VALUES (?, ?)",
+            (descricao, marca),
+        )
+        conexao.commit()
+        print("Roupa cadastrada com sucesso.")
+    except sqlite3.IntegrityError:
+        print("Nao foi possivel cadastrar a roupa.")
 
 def listar_roupas(conexao):
-    return
+    roupas = conexao.execute(
+        "SELECT id, descricao, marca FROM roupas ORDER BY id"
+    ).fetchall()
+
+    if not roupas:
+        print("Nenhuma roupa cadastrada.")
+        return
+
+    for roupa in roupas:
+        print(f"[{roupa['id']}] {roupa['descricao']} - {roupa['marca']}")
 
 
 def atualizar_roupa(conexao):
-    return
+    print("\nRoupas cadastrados atualmente:")
+    listar_roupas(conexao)
+
+    id_texto = input("ID da roupa: ").strip()
+    if not id_texto.isdigit():
+        print("ID invalido.")
+        return
+
+    nova_descricao = input("Novo nome: ").strip()
+    if not nova_descricao:
+        print("Nome invalido.")
+        return
+
+    nova_marca = input("Nova marca: ").strip()
+    if not nova_marca:
+        print("Marca invalida.")
+        return
+
+    cursor = conexao.execute(
+        "UPDATE roupas SET descricao = ?, marca = ? WHERE id = ?",
+        (nova_descricao, nova_marca, int(id_texto)),
+    )
+    conexao.commit()
+
+    if cursor.rowcount == 0:
+        print("Roupa nao encontrado.")
+    else:
+        print("Dados da roupa atualizados com sucesso.")
 
 
 def remover_roupa(conexao):
