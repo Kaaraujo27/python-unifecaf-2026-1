@@ -3,8 +3,8 @@
 
 # escreva seu código abaixo
 
-numero = int(input('Digite um número: '))
-if numero >10:
-    print('Esse número é maior que dez!')
+numero = float(input('Digite um número: '))
+if numero >50:
+    print('Esse número é maior que Cinquenta!')
 else:
-    print('Esse número é menor que dez!')
+    print('Esse número é menor que Cinquenta!')
