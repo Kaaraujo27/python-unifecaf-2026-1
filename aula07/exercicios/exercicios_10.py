@@ -1,4 +1,4 @@
 i = 0
 while i < 3:
-    print("Python")
+    print("Boa pa nós")
     i += 1
